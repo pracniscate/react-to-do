@@ -26,6 +26,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      {/* take todos from state
+          pass it to Todos component as a prop todos
+          Q: how to access this from Todos components?
+     */}
         <Todos todos={this.state.todos} />
       </div>
     );
