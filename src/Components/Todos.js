@@ -10,7 +10,7 @@ class Todos extends Component {
     // loop through the array of Todos & output something (JSX)
     // return something for each todo
     return this.props.todos.map((todo) => (
-      <TodoItem todo={todo} />
+      <TodoItem key={todo.id} todo={todo} />
     ));
   }
 }
