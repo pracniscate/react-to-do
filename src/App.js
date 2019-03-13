@@ -34,6 +34,13 @@ markComplete = (id) => {
   }) });
 }
 
+// delete 
+delTodo = (id) => {
+  // spread operator ... copies items in array
+  // filter out the element that needs to be deleted
+  this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] });
+}
+
   render() {
     return (
       <div className="App">
@@ -41,7 +48,7 @@ markComplete = (id) => {
           pass it to Todos component as a prop todos
           Q: how to access this from Todos components?
      */}
-        <Todos todos={this.state.todos} markComplete={this.markComplete} />
+        <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo} />
       </div>
     );
   }

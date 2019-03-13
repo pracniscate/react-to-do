@@ -11,7 +11,7 @@ class Todos extends Component {
     // loop through the array of Todos & output something (JSX)
     // return something for each todo
     return this.props.todos.map((todo) => (
-      <TodoItem key={todo.id} todo={todo} markComplete={this.props.markComplete} />
+      <TodoItem key={todo.id} todo={todo} markComplete={this.props.markComplete} delTodo={this.props.delTodo} />
     ));
   }
 }
