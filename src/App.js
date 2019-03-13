@@ -23,6 +23,11 @@ class App extends Component {
       }
     ]
   }
+
+markComplete = (id) => {
+  console.log(id);
+}
+
   render() {
     return (
       <div className="App">
@@ -30,7 +35,7 @@ class App extends Component {
           pass it to Todos component as a prop todos
           Q: how to access this from Todos components?
      */}
-        <Todos todos={this.state.todos} />
+        <Todos todos={this.state.todos} markComplete={this.markComplete} />
       </div>
     );
   }
