@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Components/layout/Header'
 import Todos from './Components/Todos';
+import AddTodo from './Components/AddTodo';
 
 import './App.css';
 
@@ -45,12 +46,15 @@ delTodo = (id) => {
   render() {
     return (
       <div className="App">
-      <Header />
-      {/* take todos from state
-          pass it to Todos component as a prop todos
-          Q: how to access this from Todos components?
-     */}
-        <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo} />
+        <div className="container">
+          <Header />
+          <AddTodo />
+          {/* take todos from state
+              pass it to Todos component as a prop todos
+              Q: how to access this from Todos components?
+          */}
+          <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo} />
+        </div>
       </div>
     );
   }
