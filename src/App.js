@@ -6,57 +6,47 @@ import AddTodo from './Components/AddTodo';
 import About from './Components/pages/About';
 // to generate a random id
 import uuid from 'uuid';
+import axios from 'axios';
 
 import './App.css';
 
 class App extends Component {
   state = {
-    todos: [
-      {
-        id: uuid.v4(),
-        title: 'Wake up early',
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: 'Make nutritious breakfast',
-        completed: true
-      },
-      {
-        id: uuid.v4(),
-        title: 'Wash socks',
-        completed: false
+    todos: []
+  }
+
+  componentDidMount() {
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+      .then(res => this.setState({ todos: res.data }))
+  }
+
+  markComplete = (id) => {
+    // change the state 
+    this.setState({ todos: this.state.todos.map(todo => {
+      if(todo.id === id) {
+        todo.completed = !todo.completed
       }
-    ]
+      return todo;
+    }) });
   }
 
-markComplete = (id) => {
-  // change the state 
-  this.setState({ todos: this.state.todos.map(todo => {
-    if(todo.id === id) {
-      todo.completed = !todo.completed
+  // delete 
+  delTodo = (id) => {
+    // spread operator ... copies items in array
+    // filter out the element that needs to be deleted
+    this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] });
+  }
+
+  // add new to-do
+  addTodo = (title) => {
+    const newTodo = {
+      id: uuid.v4(),
+      title,
+      completed: false 
     }
-    return todo;
-  }) });
-}
-
-// delete 
-delTodo = (id) => {
-  // spread operator ... copies items in array
-  // filter out the element that needs to be deleted
-  this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] });
-}
-
-// add new to-do
-addTodo = (title) => {
-  const newTodo = {
-    id: uuid.v4(),
-    title,
-    completed: false 
+    // add the new to-do to the state
+    this.setState({ todos: [...this.state.todos, newTodo] })
   }
-  // add the new to-do to the state
-  this.setState({ todos: [...this.state.todos, newTodo] })
-}
 
   render() {
     return (
