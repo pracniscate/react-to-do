@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Header from './Components/layout/Header'
 import Todos from './Components/Todos';
 import AddTodo from './Components/AddTodo';
+// to generate a random id
+import uuid from 'uuid';
 
 import './App.css';
 
@@ -9,17 +11,17 @@ class App extends Component {
   state = {
     todos: [
       {
-        id: 1,
+        id: uuid.v4(),
         title: 'Wake up early',
         completed: false
       },
       {
-        id: 2,
+        id: uuid.v4(),
         title: 'Make nutritious breakfast',
         completed: true
       },
       {
-        id: 3,
+        id: uuid.v4(),
         title: 'Wash socks',
         completed: false
       }
@@ -46,7 +48,7 @@ delTodo = (id) => {
 // add new to-do
 addTodo = (title) => {
   const newTodo = {
-    id: 4,
+    id: uuid.v4(),
     title,
     completed: false 
   }
