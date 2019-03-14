@@ -43,12 +43,23 @@ delTodo = (id) => {
   this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] });
 }
 
+// add new to-do
+addTodo = (title) => {
+  const newTodo = {
+    id: 4,
+    title,
+    completed: false 
+  }
+  // add the new to-do to the state
+  this.setState({ todos: [...this.state.todos, newTodo] })
+}
+
   render() {
     return (
       <div className="App">
         <div className="container">
           <Header />
-          <AddTodo />
+          <AddTodo addTodo={this.addTodo} />
           {/* take todos from state
               pass it to Todos component as a prop todos
               Q: how to access this from Todos components?

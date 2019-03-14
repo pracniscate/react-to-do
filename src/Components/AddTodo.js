@@ -6,12 +6,21 @@ export class AddTodo extends Component {
     title: ''
   }
 
+  onSubmit = (e) => {
+    // prevent the form from submitting data to an actual file
+    e.preventDefault();
+    // add a title
+    this.props.addTodo(this.state.title);
+    // clear the field after submit
+    this.setState({ title: '' });
+  }
+
   // set the state to what user types in
   onChange = (e) => this.setState({ title: e.target.value });
 
   render() {
     return (
-      <form style={{ display: 'flex' }}>
+      <form onSubmit={this.onSubmit} style={{ display: 'flex' }}>
         <input 
           type="text" 
           name="title" 
