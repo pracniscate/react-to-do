@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './Components/layout/Header'
 import Todos from './Components/Todos';
 import AddTodo from './Components/AddTodo';
+import About from './Components/pages/About';
 // to generate a random id
 import uuid from 'uuid';
 
@@ -58,17 +60,24 @@ addTodo = (title) => {
 
   render() {
     return (
-      <div className="App">
-        <div className="container">
-          <Header />
-          <AddTodo addTodo={this.addTodo} />
-          {/* take todos from state
-              pass it to Todos component as a prop todos
-              Q: how to access this from Todos components?
-          */}
-          <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo} />
+      <Router>
+        <div className="App">
+          <div className="container">
+            <Header />
+            <Route exact path="/" render={props => (
+              <React.Fragment>
+                <AddTodo addTodo={this.addTodo} />
+                {/* take todos from state
+                    pass it to Todos component as a prop todos
+                    Q: how to access this from Todos components?
+                */}
+                <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo} />
+              </React.Fragment>
+            )} />
+            <Route path="/about" component={About} />
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
