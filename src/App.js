@@ -5,7 +5,7 @@ import Todos from './Components/Todos';
 import AddTodo from './Components/AddTodo';
 import About from './Components/pages/About';
 // to generate a random id
-import uuid from 'uuid';
+// import uuid from 'uuid';
 import axios from 'axios';
 
 import './App.css';
@@ -39,13 +39,12 @@ class App extends Component {
 
   // add new to-do
   addTodo = (title) => {
-    const newTodo = {
-      id: uuid.v4(),
-      title,
-      completed: false 
-    }
+    axios.post('https://jsonplaceholder.typicode.com/todos',
+    { title,
+      completed: false
+    })
     // add the new to-do to the state
-    this.setState({ todos: [...this.state.todos, newTodo] })
+      .then(res => this.setState({ todos: [...this.state.todos, res.data] }));
   }
 
   render() {
